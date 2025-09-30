@@ -4,14 +4,17 @@ module bit_detector (
     input logic rst_n,
     output logic zero_detected
 );
+
+logic rx_serial_prev;
+
 always_ff @(posedge div_clk or negedge rst_n) begin
     if (!rst_n) begin
         zero_detected <= 1'b0;
-    end
-    else if (rx_serial == 1'b0) begin
-        zero_detected <= 1'b1;
+        rx_serial_prev <= 1'b1;  
     end else begin
-        zero_detected <= 1'b0;
+        
+        zero_detected <= (rx_serial_prev == 1'b1 && rx_serial == 1'b0);
+        rx_serial_prev <= rx_serial;
     end
 end
 

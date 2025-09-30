@@ -15,8 +15,7 @@ module uart_rx_fsm (
     output logic start_check,
     output logic start_count,
     output logic start_shift,
-    output logic rx_ready,
-    output logic rx_busy
+    output logic rx_ready
     
 );
 state_t c_state, n_state;
@@ -53,7 +52,6 @@ always_comb begin
 end
 //output logic
 always_comb begin
-    rx_busy = 0;
     start_count = 0;
     start_shift = 0;
     rx_ready = 0;
@@ -70,13 +68,12 @@ always_comb begin
             
         end
         START: begin
-            rx_busy = 1;
+            
             start_count = 1;
             start_shift = 1;
         end
         CHECK_ERROR: begin
             start_check = 1;
-            rx_busy = 1;
         end
 
         

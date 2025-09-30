@@ -61,13 +61,13 @@ always_comb begin
     case (c_state)
         IDLE: begin
             if (zero_detected) begin
-                rx_busy     = 1;
-                start_count = 1;
                 start_shift = 1;
+                start_count = 1;
             end
             else begin
                 rx_ready = 1;
             end
+            
         end
         START: begin
             rx_busy = 1;

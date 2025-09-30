@@ -44,9 +44,9 @@ module top_module_tb;
         #3
         rst_n = 1;
         @(posedge div_clk);
-        rx_serial = 0;
+        rx_serial = 0;      // start bit
         @(posedge div_clk);
-        // sending 10100101
+                            // sending 10100101
         rx_serial = 1;
         @(posedge div_clk);
         rx_serial = 0;
@@ -55,7 +55,6 @@ module top_module_tb;
         @(posedge div_clk);
         rx_serial = 0;
         @(posedge div_clk);
-
         rx_serial = 0;
         @(posedge div_clk);
         rx_serial = 1;
@@ -64,8 +63,7 @@ module top_module_tb;
         @(posedge div_clk);
         rx_serial = 1;
         @(posedge div_clk);
-        rx_serial = 0;
-        repeat (2) @(posedge clk);
+        repeat (2) @(posedge div_clk);
 
         // Finish simulation
         $finish;
